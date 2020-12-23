@@ -176,3 +176,4 @@ D:\DESARROLLO\zemoga\BloggingPlatform\Blogging\BloggingApp\obj\Debug\netcoreapp3
 D:\DESARROLLO\zemoga\BloggingPlatform\Blogging\BloggingApp\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\Edit.cshtml.g.cs
 D:\DESARROLLO\zemoga\BloggingPlatform\Blogging\BloggingApp\obj\Debug\netcoreapp3.1\Razor\Views\Blogs\Index.cshtml.g.cs
 D:\DESARROLLO\zemoga\BloggingPlatform\Blogging\BloggingApp\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+D:\DESARROLLO\zemoga\BloggingPlatform\Blogging\BloggingApp\obj\Debug\netcoreapp3.1\BloggingApp.csprojAssemblyReference.cache

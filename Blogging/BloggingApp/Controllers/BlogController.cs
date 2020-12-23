@@ -18,6 +18,7 @@ namespace BloggingApp.Controllers {
         private readonly IBlogPublication _blogPublication;
         //Instead of having this attribute . The interface IBlogPublicationFetcher  could have extened form IBlogPublication
         private readonly IBlogPublicationFetcher _blogPublicationFetcher;
+        private  ISession _session;
         private  User user;
         public BlogController(ILogger<BlogController> logger,
         IBlogPublication blogPublication,
@@ -25,14 +26,29 @@ namespace BloggingApp.Controllers {
             _logger = logger;
             _blogPublication = blogPublication;
             _blogPublicationFetcher = blogPublicationFetcher;
-            
+            if(HttpContext != null)
+            _session = HttpContext.Session;
+        }
+
+        
+          public void SetISession(ISession session) {
+            _session = session;
         }
 
         private User _GetUserFromSession() {
             if(this.user == null) {
-                this.user = HttpContext.Session.GetObject<User>("User");
+                this.user = _session.GetObject<User>("User");
             }
             return user;
+        }
+
+        /// <summary>
+        /// this method is call on unit test
+        /// Because I could not set the 
+        /// </summary>
+        /// <param name="user"></param>
+        public void SetUser(User user) {
+            this.user = user;
         }
 
         // GET: BlogController
@@ -48,11 +64,18 @@ namespace BloggingApp.Controllers {
         public ActionResult Details(long id) {
             var user = this._GetUserFromSession();
             var blog  = _blogPublication.GetBlogById(id, user);
-            if( blog != null ) { 
+            if( blog != null 
+                &&(
+                user.Role.RolType == RolType.editor 
+                ||
+                  (user.Role.RolType != RolType.editor &&
+                    ( blog.BlogStatus == BlogStatus.publicated || blog.BlogStatus == BlogStatus.rejected) )
+                )
+                ) { 
                 return View(blog);
             }
-            var message = System.Net.WebUtility.UrlEncode("You can not access the blog.");
-            return RedirectToPage("Blog/Index?error="+ message);
+            var message = "You can not access the blog.";
+            return RedirectToPage("Blog/Index", new { error = message });
 
         }
 
@@ -73,8 +96,8 @@ namespace BloggingApp.Controllers {
                     return RedirectToAction(nameof(Index));
                 }
                 else {
-                    var message = System.Net.WebUtility.UrlEncode("There has been an error posting the blog.");
-                    return RedirectToPage("Blog/Index?error=" + message);
+                    var message = "There has been an error posting the blog.";
+                    return RedirectToPage("Blog/Index", new { error = message });
                 }
             }
             catch(Exception ex) {
@@ -93,15 +116,16 @@ namespace BloggingApp.Controllers {
             var blog = _blogPublication.GetBlogById(id, user);
             if( blog != null &&
                 user.Role.RolType != RolType.editor &&
+                blog.Author.Id == user.Id &&
                 blog.BlogStatus == BlogStatus.rejected) { 
                 return View(blog);
             }
-            var message = System.Net.WebUtility.UrlEncode("You can not access the blog.");
-            return RedirectToPage("Blog/Index?error=" + message);
+            var message = "You can not access the blog.";
+            return RedirectToPage("Blog/Index", new { error = message });
         }
 
         [SessionActionFilter]
-        public ActionResult Reject(long id) {
+        public ActionResult RejectBlog(long id) {
             var user = this._GetUserFromSession();
             var blog = _blogPublication.GetBlogById(id, user);
             if(blog != null &&
@@ -110,8 +134,8 @@ namespace BloggingApp.Controllers {
                 _blogPublication.RejectBlog(user,blog);
                 return View(blog);
             }
-            var message = System.Net.WebUtility.UrlEncode("You can not access the blog.");
-            return RedirectToPage("Blog/Index?error=" + message);
+            var message ="You can not access the blog.";
+            return RedirectToPage("Blog/Index", new { error = message });
         }
 
         // POST: BlogController/Edit/5
@@ -139,7 +163,7 @@ namespace BloggingApp.Controllers {
 
         // GET: BlogController/Delete/5
         [SessionActionFilter]
-        public ActionResult Delete(int id) {
+        public ActionResult Delete(long id) {
             var user = this._GetUserFromSession();
             var blog = _blogPublication.GetBlogById(id, user);
             if(blog != null &&
@@ -148,8 +172,8 @@ namespace BloggingApp.Controllers {
                 _blogPublication.DeleteBlog(user, blog);
                 return View(blog);
             }
-            var message = System.Net.WebUtility.UrlEncode("You can not access the blog.");
-            return RedirectToPage("Blog/Index?error=" + message);
+            var message = "You can not access the blog.";
+            return RedirectToPage("Blog/Index", new { error = message });
         }
 
       

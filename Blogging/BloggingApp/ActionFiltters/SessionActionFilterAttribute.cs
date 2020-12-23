@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using System.Net;
 
 namespace BloggingApp.ActionFiltters {
     public class SessionActionFilterAttribute : Attribute, IActionFilter {
@@ -23,8 +24,11 @@ namespace BloggingApp.ActionFiltters {
                 new RouteValueDictionary
                 {
                     { "controller", "Home" },
-                    { "action", "Index?"+message }
+                    { "action", "Index"},
+                      { "error", message},
                 });
+
+
             }
 
         }

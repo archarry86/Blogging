@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using BloggingApp.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace BloggingApp {
     public class Startup {
@@ -21,6 +22,7 @@ namespace BloggingApp {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+          
             services.AddScoped<Interfaces.IBlogPublication, BloggingApp.Implementations.BlogManager>();
             services.AddScoped<Interfaces.IBlogPublicationFetcher, BloggingApp.Implementations.BlogManager>();
             services.AddScoped<Interfaces.IUserManager, BloggingApp.Implementations.UserManager>();

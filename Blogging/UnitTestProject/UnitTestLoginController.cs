@@ -20,7 +20,8 @@ namespace UnitTestProject {
             var loggerMock = new Mock<ILogger<LoginController>>();
             var sessionMock = new Mock<ISession>();
             var userMock = CreateMock();
-            var controller = new LoginController( loggerMock.Object, userMock.Object, sessionMock.Object);
+            var controller = new LoginController(loggerMock.Object, userMock.Object);
+            controller.SetISession(sessionMock.Object);
             var iactionresult =  controller.Login(new BloggingApp.ViewModel.ModelWiewUser() {
                 Login="admin",
                 Password = "12345",
@@ -38,7 +39,8 @@ namespace UnitTestProject {
             var loggerMock = new Mock<ILogger<LoginController>>();
             var sessionMock = new Mock<ISession>();
             var userMock = CreateMock();
-            var controller = new LoginController(loggerMock.Object, userMock.Object, sessionMock.Object);
+            var controller = new LoginController(loggerMock.Object, userMock.Object);
+            controller.SetISession(sessionMock.Object);
             var iactionresult = controller.Login(new BloggingApp.ViewModel.ModelWiewUser() {
                 Login = "ablogger",
                 Password = "12345",
@@ -54,7 +56,8 @@ namespace UnitTestProject {
             var loggerMock = new Mock<ILogger<LoginController>>();
             var userMock = CreateMock();
             var sessionMock = new Mock<ISession>();
-            var controller = new LoginController(loggerMock.Object, userMock.Object, sessionMock.Object);
+            var controller = new LoginController(loggerMock.Object, userMock.Object);
+            controller.SetISession(sessionMock.Object);
             var iactionresult = controller.Login(new BloggingApp.ViewModel.ModelWiewUser() {
                 Login = "invalidyser",
                 Password = "12345",
@@ -71,7 +74,8 @@ namespace UnitTestProject {
             var loggerMock = new Mock<ILogger<LoginController>>();
             var sessionMock = new Mock<ISession>();
             var userMock = CreateMock();
-            var controller = new LoginController(loggerMock.Object, userMock.Object, sessionMock.Object);
+            var controller = new LoginController(loggerMock.Object, userMock.Object);
+            controller.SetISession(sessionMock.Object);
             var iactionresult = controller.AnonymousLogin();
             Assert.IsInstanceOfType(iactionresult, typeof(RedirectToPageResult));
             RedirectToPageResult redirectResult = iactionresult as RedirectToPageResult;
@@ -86,6 +90,9 @@ namespace UnitTestProject {
                 return users.FirstOrDefault(p => p.Login == login && p.Password == password);
             });
             userMock.Setup(m => m.ValidateUser(null, null)).Throws<ArgumentNullException>();
+
+            userMock.Setup(m => m.CreateAnonymousLogin()).Returns(users[2]);
+
             return userMock;
         }
 

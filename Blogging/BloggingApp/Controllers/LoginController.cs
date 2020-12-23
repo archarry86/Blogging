@@ -15,15 +15,20 @@ namespace BloggingApp.Controllers {
     public class LoginController : Controller {
         private readonly ILogger<LoginController> _logger;
         private readonly IUserManager _usermanager;
-        private readonly ISession _session;
+        private  ISession _session;
         public LoginController(ILogger<LoginController> logger,
-           IUserManager usermanager,
-           ISession session) {
+           IUserManager usermanager
+           ) {
             _logger = logger;
             _usermanager = usermanager;
-            _session = session;
+            if(HttpContext != null)
+                _session = HttpContext.Session;
         }
 
+
+        public void SetISession(ISession session) {
+            _session = session;
+        }
   
         public ActionResult Index() {
            
@@ -38,8 +43,8 @@ namespace BloggingApp.Controllers {
             }
             else {
                 //this message should be in a languaje dictinary file
-                var message = System.Net.WebUtility.UrlEncode( "The user has not been found.");
-                return RedirectToPage("Home/Index?error=" + message);
+                var message = "The user has not been found.";
+                return RedirectToPage("Home/Index", new { error = message });
             }
         }
 
