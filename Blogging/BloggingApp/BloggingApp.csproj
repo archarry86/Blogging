@@ -7,10 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ModelsView\Blog.cs" />
-    <Compile Remove="ModelsView\BlogFilterParameters.cs" />
-    <Compile Remove="ModelsView\ErrorViewModel.cs" />
-    <Compile Remove="ModelsView\Role.cs" />
+    <Compile Remove="ViewModel\Blog.cs" />
+    <Compile Remove="ViewModel\ErrorViewModel.cs" />
+    <Compile Remove="ViewModel\Role.cs" />
   </ItemGroup>
 
   <ItemGroup>

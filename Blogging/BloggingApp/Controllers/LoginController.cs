@@ -1,6 +1,5 @@
 ﻿using BloggingApp.Interfaces;
 using BloggingApp.Models;
-using BloggingApp.ModelsView;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BloggingApp.Helpers;
+using BloggingApp.ViewModel;
 
 namespace BloggingApp.Controllers {
     public class LoginController : Controller {
