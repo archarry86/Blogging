@@ -21,5 +21,7 @@ namespace BloggingApp.Interfaces {
         /// <returns></returns>
         User CreateAnonymousLogin();
 
+
+
     }
 }

@@ -9,5 +9,6 @@ namespace BloggingApp.Models {
         pendingPublishApproval,
         publicated,
         deleted,
+        rejected
     }
 }

@@ -19,7 +19,12 @@ namespace BloggingApp {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddScoped<Interfaces.IBlogPublication, BloggingApp.Implementations.BlogManager>();
+            services.AddScoped<Interfaces.IBlogPublicationFetcher, BloggingApp.Implementations.BlogManager>();
+            services.AddScoped<Interfaces.IUserManager, BloggingApp.Implementations.UserManager>();
+
             services.AddControllersWithViews();
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

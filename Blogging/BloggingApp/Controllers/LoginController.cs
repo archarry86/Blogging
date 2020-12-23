@@ -30,7 +30,7 @@ namespace BloggingApp.Controllers {
             }
             else {
                 //this message should be in a languaje dictinary file
-                var message = "The user has not been found.";
+                var message = System.Net.WebUtility.UrlEncode( "The user has not been found.");
                 return RedirectToPage("Home/Index?error=" + message);
             }
         }

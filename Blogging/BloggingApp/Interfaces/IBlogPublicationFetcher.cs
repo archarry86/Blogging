@@ -17,7 +17,7 @@ namespace BloggingApp.Interfaces {
         /// <param name="user"></param>
         /// <param name="blog"></param>
         /// <returns></returns>
-        IEnumerable<Blog> GetPenddingBlogs(User user, BlogFilterParameters parameters);
+        IEnumerable<Blog> GetPenddingBlogs(User user, IBlogFilterParameters parameters);
 
         /// <summary>
         /// An Editor publish the blog
@@ -25,7 +25,7 @@ namespace BloggingApp.Interfaces {
         /// <param name="user"></param>
         /// <param name="blog"></param>
         /// <returns></returns>
-        IEnumerable<Blog> GetBlogs(User user, BlogFilterParameters parameters);
+        IEnumerable<Blog> GetBlogs(User user, IBlogFilterParameters parameters);
 
     }
 }

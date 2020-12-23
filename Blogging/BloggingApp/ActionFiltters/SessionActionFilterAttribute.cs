@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace BloggingApp.ActionFiltters {
-    public class SessionActionFilter : IActionFilter {
+    public class SessionActionFilterAttribute : Attribute, IActionFilter {
         public void OnActionExecuted(ActionExecutedContext context) {
            
         }

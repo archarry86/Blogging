@@ -44,7 +44,13 @@ namespace BloggingApp.Interfaces {
         /// <param name="blog"></param>
         /// <returns></returns>
         IEnumerable<Blog> GetBlogs(User user);
-
-
+        /// <summary>
+        /// Returns a Blog by the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        Blog GetBlogById( long id, User user);
+        void RejectBlog(Blog blog);
     }
 }

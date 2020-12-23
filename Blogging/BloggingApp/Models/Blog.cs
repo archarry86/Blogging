@@ -12,7 +12,7 @@ namespace BloggingApp.Models {
         /// <summary>
         /// Status of the blog
         /// </summary>
-        public BlogStatus BlogStatus { get; set; }
+        public BlogStatus BlogStatus { get; internal set; }
         /// <summary>
         /// Author od the blog
         /// </summary>

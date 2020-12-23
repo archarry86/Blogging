@@ -1,11 +1,12 @@
-﻿using BloggingApp.Models;
+﻿using BloggingApp.Interfaces;
+using BloggingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BloggingApp.ViewModel {
-    public class BlogFilterParameters {
+    public class BlogFilterParameters : IBlogFilterParameters {
 
         /// <summary>
         /// Status to filter
@@ -34,13 +35,12 @@ namespace BloggingApp.ViewModel {
         /// <summary>
         /// Approval Time to filter
         /// </summary>
-        public DateTime ApprovalTimeStart{ get; set; }
+        public DateTime ApprovalTimeStart { get; set; }
         /// <summary>
         /// User Who Approved to filter
         /// </summary>
         public int ApprovalUserLogin { get; set; }
-
-
-
+        public int page { get; set; }
+        public int size { get; set; }
     }
 }
