@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BloggingApp.Models {
@@ -12,7 +13,8 @@ namespace BloggingApp.Models {
         /// <summary>
         /// Status of the blog
         /// </summary>
-        public BlogStatus BlogStatus { get; internal set; }
+        [JsonIgnore]
+        public BlogStatus BlogStatus { get;  set; }
         /// <summary>
         /// Author od the blog
         /// </summary>
@@ -41,7 +43,9 @@ namespace BloggingApp.Models {
         /// User Who Approved the blog publication
         /// </summary>
         public User EditorUser { get; set; }
-
+        /// <summary>
+        /// Data of the user connection , a finger print
+        /// </summary>
         public String FingerPrintUser { get; set; }
 
     }

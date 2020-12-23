@@ -15,11 +15,13 @@ namespace BloggingApp.Controllers {
     public class LoginController : Controller {
         private readonly ILogger<LoginController> _logger;
         private readonly IUserManager _usermanager;
-
+        private readonly ISession _session;
         public LoginController(ILogger<LoginController> logger,
-           IUserManager usermanager) {
+           IUserManager usermanager,
+           ISession session) {
             _logger = logger;
             _usermanager = usermanager;
+            _session = session;
         }
 
   
@@ -31,8 +33,8 @@ namespace BloggingApp.Controllers {
         public IActionResult Login([FromBody] ModelWiewUser User) {
             var userfound = _usermanager.ValidateUser(User.Login, User.Password);
             if(userfound != null) {
-                HttpContext.Session.SetObject("User", userfound);
-                return RedirectToPage("Blogs/Index");
+                _session.SetObject("User", userfound);
+                return RedirectToPage("Blog/Index");
             }
             else {
                 //this message should be in a languaje dictinary file
@@ -43,8 +45,8 @@ namespace BloggingApp.Controllers {
 
         public IActionResult AnonymousLogin() {
             var anonymousUser = _usermanager.CreateAnonymousLogin();
-            HttpContext.Session.SetObject("User", anonymousUser);
-            return RedirectToPage("Blogs/Index");
+            _session.SetObject("User", anonymousUser);
+            return RedirectToPage("Blog/Index");
 
         }
     }

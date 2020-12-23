@@ -15,7 +15,6 @@ namespace BloggingApp.ActionFiltters {
         public void OnActionExecuted(ActionExecutedContext context) {
            
         }
-
         public void OnActionExecuting(ActionExecutingContext context) {
           var user = context.HttpContext.Session.GetObject<User>("User");
             if(user == null) {
