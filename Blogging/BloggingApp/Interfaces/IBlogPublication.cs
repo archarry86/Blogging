@@ -51,6 +51,6 @@ namespace BloggingApp.Interfaces {
         /// <param name="user"></param>
         /// <returns></returns>
         Blog GetBlogById( long id, User user);
-        void RejectBlog(Blog blog);
+        void RejectBlog(User user, Blog blog);
     }
 }

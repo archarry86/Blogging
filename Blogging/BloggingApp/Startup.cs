@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using BloggingApp.Data;
 
 namespace BloggingApp {
     public class Startup {
@@ -23,7 +25,14 @@ namespace BloggingApp {
             services.AddScoped<Interfaces.IBlogPublicationFetcher, BloggingApp.Implementations.BlogManager>();
             services.AddScoped<Interfaces.IUserManager, BloggingApp.Implementations.UserManager>();
 
+            services.AddMvc()
+            .AddSessionStateTempDataProvider();
+            services.AddSession();
+
             services.AddControllersWithViews();
+
+    services.AddDbContext<BloggingAppContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("BloggingAppContext")));
          
         }
 
@@ -44,11 +53,17 @@ namespace BloggingApp {
 
             app.UseAuthorization();
 
+        
+            /**/
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            
+
+
         }
     }
 }

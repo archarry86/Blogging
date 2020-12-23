@@ -22,6 +22,12 @@ namespace BloggingApp.Controllers {
             _usermanager = usermanager;
         }
 
+  
+        public ActionResult Index() {
+           
+            return View();
+        }
+
         public IActionResult Login([FromBody] ModelWiewUser User) {
             var userfound = _usermanager.ValidateUser(User.Login, User.Password);
             if(userfound != null) {

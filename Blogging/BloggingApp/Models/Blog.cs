@@ -8,7 +8,7 @@ namespace BloggingApp.Models {
         /// <summary>
         /// Indentifier of the blog
         /// </summary>
-        public long IdBlog { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// Status of the blog
         /// </summary>
@@ -40,9 +40,9 @@ namespace BloggingApp.Models {
         /// <summary>
         /// User Who Approved the blog publication
         /// </summary>
-        public User ApprovalUser { get; set; }
+        public User EditorUser { get; set; }
 
-
+        public String FingerPrintUser { get; set; }
 
     }
 }

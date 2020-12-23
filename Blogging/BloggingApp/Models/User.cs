@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace BloggingApp.Models {
     public class User {
-        public int id { get;  set; }
+        public int Id { get;  set; }
         public string Login { get;  set; }
+
+        public string Password { get; set; }
         public Role Role { get;  set; }
 
     }

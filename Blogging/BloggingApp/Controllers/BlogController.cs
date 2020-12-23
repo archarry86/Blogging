@@ -101,13 +101,13 @@ namespace BloggingApp.Controllers {
         }
 
         [SessionActionFilter]
-        public ActionResult ReJECT(long id) {
+        public ActionResult Reject(long id) {
             var user = this._GetUserFromSession();
             var blog = _blogPublication.GetBlogById(id, user);
             if(blog != null &&
                 user.Role.RolType == RolType.editor &&
                 blog.BlogStatus != BlogStatus.rejected) {
-                _blogPublication.RejectBlog(blog);
+                _blogPublication.RejectBlog(user,blog);
                 return View(blog);
             }
             var message = System.Net.WebUtility.UrlEncode("You can not access the blog.");
